@@ -1,6 +1,6 @@
 .phony: clean
 
-EXECS=ejemploProceso crearProceso directCalling manualCalling
+EXECS=ejemploProceso crearProceso directCalling manualCalling leerFichero
 
 all: $(EXECS)
 
@@ -26,6 +26,11 @@ manualCalling.o: manualCalling.cpp
 directCalling.o: directCalling.cpp
 
 mifuncion.o: mifuncion.cpp
+
+leerFichero: leerFichero.o
+	g++ -o $@ $<
+
+leerFichero.o: leerFichero.cpp 
 
 clean:
 	rm -f *.o *.cpp~ makefile~

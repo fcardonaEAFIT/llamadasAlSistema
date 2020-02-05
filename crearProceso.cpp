@@ -1,3 +1,8 @@
+/*
+ * crearProceso se encarga de crear un proceso
+ *
+ * Programador: Juan Francisco Cardona Mc'Cormick
+ */
 #include <iostream>
 #include <cerrno>
 #include <cstdlib>
@@ -22,18 +27,18 @@ main(int argc, char *argv[], char *arge[]) {
 
   if (hijo == -1) {
     std:: cout << "Error: " << errno << std::endl;
-    
+
     if (errno == EAGAIN) {
       std::cerr << "Error manejar el error aqui" << std::endl;
     }
-    
+
     ::exit(0);
   }
 
   if (hijo == 0) { // El proceso hijo
 
     char *args[5];
-    
+
     args[0] = new char[::strlen(EMACSNAME)];
     ::strcpy(args[0], EMACSNAME);
     args[1] = new char[::strlen(NOWINDOW)];
@@ -43,7 +48,7 @@ main(int argc, char *argv[], char *arge[]) {
     args[3] = new char[::strlen(FILEOPEN)];
     ::strcpy(args[3], FILEOPEN);
     args[4] = NULL;
-    
+
     ::execve("/usr/bin/emacs",
              args,
              arge);
@@ -51,9 +56,9 @@ main(int argc, char *argv[], char *arge[]) {
   }
   else {  // El proceso padre
     int status;
-    
+
     ::wait(&status);
-    
+
     if (WIFEXITED(status)) {
       std::cout << "Mi proceso hijo termina con:"  << WEXITSTATUS(status)
                 << std::endl;
@@ -63,6 +68,6 @@ main(int argc, char *argv[], char *arge[]) {
                 << WTERMSIG(status) << std::endl;
     }
   }
-  
+
   return 0;
 }
