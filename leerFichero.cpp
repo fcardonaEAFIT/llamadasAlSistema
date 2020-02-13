@@ -8,7 +8,7 @@
 #include <iostream>
 
 using namespace std;
-const char *nomFic = "tiendas-virtuales.csv";
+const char *nomFic = "crearProceso"; // "tiendas-virtuales.csv";
 const int TAM_BUFF = 1024;
 
 int
@@ -37,5 +37,6 @@ main() {
   else
     write(STDOUT_FILENO, buffer, nbl);
 
+  close(fd);
   return EXIT_SUCCESS;
 }
